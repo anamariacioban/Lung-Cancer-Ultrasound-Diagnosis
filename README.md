@@ -1,4 +1,4 @@
-# Lung-Cancer-Ultrasound-Diagnosis
+# Lung-Cancer-Ultrasound-Diagnosis (In progress)
 Intelligent system for lung cancer diagnosis based on transthoracic ultrasound image analysis.
 
 
