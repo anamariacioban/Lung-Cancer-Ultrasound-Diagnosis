@@ -150,19 +150,20 @@ Each segmented lesion is therefore represented as a numerical feature vector tha
 
 ---
 
-### 4.2 Feature Dataset Construction
+### 4.2 Dataset Organization and Preparation for Training
 
-After feature extraction, a structured dataset was created in tabular format. In this dataset:
+The dataset used for classification was organized into two separate directories corresponding to the two classes:
 
-- each row corresponds to one ultrasound image;
-- each column represents an extracted feature;
-- the final column contains the associated class label (cancer / non-cancer).
+- `cancer`
+- `non-cancer`
 
-This structured representation enables the application of supervised machine learning techniques for binary classification.
+Each directory contains the ultrasound images associated with the respective diagnosis. This folder-based structure enables automatic label assignment during data loading, where the folder name represents the ground truth class.
 
-The dataset was divided into training and testing subsets using a standard train-test split strategy. A ratio of 70% for training and 30% for testing was adopted to evaluate generalization performance on unseen data.
+After segmentation and feature extraction, each processed image is associated with its corresponding class label derived from the directory structure.
 
-To ensure reproducibility, the data split was performed using a fixed random state.
+The complete feature dataset was then divided into training and testing subsets using a standard train-test split strategy. A ratio of 70% for training and 30% for testing was adopted in order to evaluate model generalization on unseen data.
+
+The split was performed using a fixed random state to ensure reproducibility of the experimental results.
 
 ---
 
