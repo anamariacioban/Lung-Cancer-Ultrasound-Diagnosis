@@ -12,3 +12,5 @@ The notebooks cover the following stages of the processing pipeline:
 - model training and evaluation (Logistic Regression)
 
 Each notebook corresponds to a specific stage of the system pipeline described in the main README file.
+Note: Some inline comments inside the notebooks are written in Romanian, as the project was originally developed in Romanian.
+
