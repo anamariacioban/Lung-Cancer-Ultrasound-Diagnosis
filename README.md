@@ -118,3 +118,119 @@ The semi-automatic approach was used to evaluate the influence of guided input o
 A fully automatic segmentation method was developed to eliminate the need for user interaction. The approach is based on multi-level thresholding (Multi-Otsu), followed by morphological operations and Active Contour refinement.
 
 This method provides consistent lesion segmentation results and represents the final preprocessing solution used in the project.
+
+---
+
+## 4. Feature Extraction and Classification
+
+### 4.1 Feature Extraction
+
+Following automatic lesion segmentation, quantitative image features were extracted from the detected lesion regions. The purpose of this stage is to convert visual information into numerical descriptors suitable for machine learning classification.
+
+A set of features was computed for each segmented lesion and grouped into three main categories:
+
+- **Geometric features:**
+  - lesion area;
+  - lesion perimeter;
+  - circularity index;
+  - aspect ratio;
+
+- **Intensity-based features:**
+  - mean grayscale intensity within the lesion;
+  - standard deviation of intensity values;
+
+- **Structural features:**
+  - compactness;
+  - solidity;
+  - edge density inside the lesion region.
+
+Geometric descriptors provide information regarding lesion shape irregularity, which is commonly associated with malignant formations. Intensity-based features reflect internal heterogeneity, while structural descriptors capture boundary consistency and morphological compactness.
+
+Each segmented lesion is therefore represented as a numerical feature vector that summarizes its morphological and intensity characteristics.
+
+---
+
+### 4.2 Feature Dataset Construction
+
+After feature extraction, a structured dataset was created in tabular format. In this dataset:
+
+- each row corresponds to one ultrasound image;
+- each column represents an extracted feature;
+- the final column contains the associated class label (cancer / non-cancer).
+
+This structured representation enables the application of supervised machine learning techniques for binary classification.
+
+The dataset was divided into training and testing subsets using a standard train-test split strategy. A ratio of 70% for training and 30% for testing was adopted to evaluate generalization performance on unseen data.
+
+To ensure reproducibility, the data split was performed using a fixed random state.
+
+---
+
+### 4.3 Classification Model
+
+A supervised binary classification approach was adopted to distinguish between cancerous and non-cancerous lesions.
+
+Logistic Regression was selected as the classification model due to:
+
+- its simplicity and computational efficiency;
+- its interpretability in medical decision-support contexts;
+- its suitability for binary classification problems;
+- its ability to provide probabilistic outputs.
+
+The model estimates the probability that a lesion belongs to the cancer class based on a linear combination of the extracted features.
+
+Training was performed using the training subset, and the resulting model was evaluated on the independent test subset.
+
+---
+
+### 4.4 Model Evaluation
+
+Model performance was assessed using standard evaluation metrics:
+
+- confusion matrix;
+- accuracy;
+- precision;
+- recall;
+- F1-score.
+
+The confusion matrix provides a detailed breakdown of prediction outcomes, including:
+
+- true positives (correctly classified cancer cases);
+- true negatives (correctly classified non-cancer cases);
+- false positives;
+- false negatives.
+
+Accuracy measures overall correctness, while precision and recall provide insight into the balance between false alarms and missed detections. The F1-score provides a harmonic balance between precision and recall.
+
+These metrics allow objective evaluation of the system’s classification capability and support further model refinement.
+
+---
+
+### 4.5 Uncertainty Zone and Decision Thresholding
+
+In addition to standard binary classification, an uncertainty zone was introduced to improve decision reliability.
+
+Instead of using a single fixed probability threshold (e.g., 0.5), two probability thresholds were defined:
+
+- probabilities below a lower threshold are classified as non-cancer;
+- probabilities above an upper threshold are classified as cancer;
+- probabilities between the two thresholds are labeled as **uncertain**.
+
+This strategy reduces the risk of confident but incorrect predictions and reflects real-world clinical reasoning, where ambiguous cases require additional investigation rather than automatic labeling.
+
+The introduction of an uncertainty zone enhances the safety and practical relevance of the system.
+
+---
+
+### 4.6 System Output
+
+The final system provides:
+
+- segmented lesion visualization;
+- extracted feature values;
+- predicted class label;
+- associated probability score;
+- optional uncertainty indication.
+
+By combining visual information with quantitative and probabilistic outputs, the system supports objective and consistent interpretation of lung ultrasound images.
+
