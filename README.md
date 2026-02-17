@@ -152,6 +152,10 @@ Each segmented lesion is therefore represented as a numerical feature vector tha
 
 ### 4.2 Dataset Organization and Preparation for Training
 
+## Dataset Availability
+
+The ultrasound dataset used in this project is not publicly distributed due to medical data privacy considerations.
+
 The dataset used for classification was organized into two separate directories corresponding to the two classes:
 
 - `cancer`
